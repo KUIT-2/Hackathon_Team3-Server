@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import static com.example.catchtable.common.response.status.BaseExceptionResponseStatus.INVALID_RESERVATION;
 import static com.example.catchtable.util.BindingResultUtils.getErrorMessages;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/restaurants/{restaurantId}/reservations")
 @RequiredArgsConstructor

@@ -117,7 +117,8 @@ public class RestaurantService {
                         review.getContents(),
                         review.getIsRevisit(),
                         review.getRating(),
-                        review.getDate()))
+                        review.getDate(),
+                        review.getUser().getName()))
                 .collect(Collectors.toList());
     }
 
