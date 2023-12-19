@@ -1,19 +1,20 @@
 package com.example.catchtable.service;
 
-import com.example.catchtable.dto.GetBriefRestaurantResponse;
-import com.example.catchtable.dto.GetRestaurantImagesResponse;
-import com.example.catchtable.dto.GetRestaurantListResponse;
+import com.example.catchtable.dto.*;
 
-import com.example.catchtable.dto.GetRestaurantMenuResponse;
 import com.example.catchtable.dto.menu.MenuDto;
 import com.example.catchtable.dto.restaurant.GetRestaurantResponse;
 import com.example.catchtable.dto.review.GetReviewResponse;
+import com.example.catchtable.model.Reservation;
 import com.example.catchtable.model.Restaurant;
 import com.example.catchtable.model.Review;
 import com.example.catchtable.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -115,6 +116,33 @@ public class RestaurantService {
                         review.getRating(),
                         review.getDate()))
                 .collect(Collectors.toList());
+    }
+
+    public GetRestaurantReservationsResponse getReservations(long restaurantId, String date) {
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new RuntimeException("Restaurant not found"));
+
+        List<Timestamp> occupiedTimes = restaurant.getReservations().stream()
+                .filter(reservation -> isSameDay(reservation.getTime(), date))
+                .map(Reservation::getDate)
+                .collect(Collectors.toList());
+
+        return new GetRestaurantReservationsResponse(
+                restaurant.getLunchStart(),
+                restaurant.getLunchEnd(),
+                restaurant.getDinnerStart(),
+                restaurant.getDinnerEnd(),
+                occupiedTimes);
+    }
+
+    private boolean isSameDay(Timestamp timestamp, String date) {
+        // Timestamp를 LocalDate로 변환
+        LocalDate timestampDate = timestamp.toLocalDateTime().toLocalDate();
+        // 주어진 문자열을 LocalDate로 변환
+        LocalDate inputDate = LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE);
+
+        // 두 LocalDate 객체 비교
+        return timestampDate.equals(inputDate);
     }
 
 }
