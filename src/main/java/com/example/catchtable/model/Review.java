@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Timestamp;
+
 
 @Entity
 @Table(name = "review")
@@ -26,6 +28,9 @@ public class Review {
 
     @Column(name = "rating", nullable = false)
     private Integer rating;
+
+    @Column(name = "date")
+    private Timestamp date;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
