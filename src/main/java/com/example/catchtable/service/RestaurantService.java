@@ -79,9 +79,12 @@ public class RestaurantService {
         // 별점 계산 로직 구현
         List<Review> reviews = restaurant.getReviews();
         double sum = 0;
+        int count = 0;
         for (Review review : reviews) {
             sum += review.getRating();
+            count++;
         }
+        sum /= count;
         return sum; // 임시 반환값
     }
 
