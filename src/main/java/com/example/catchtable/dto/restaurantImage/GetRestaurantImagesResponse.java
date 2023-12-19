@@ -1,4 +1,4 @@
-package com.example.catchtable.dto;
+package com.example.catchtable.dto.restaurantImage;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetRestaurantMenuResponse {
-
-    private String menuName;
-    private long price;
+public class GetRestaurantImagesResponse {
+    private String imageUrl;
 }

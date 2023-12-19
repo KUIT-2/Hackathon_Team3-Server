@@ -1,10 +1,10 @@
 package com.example.catchtable.controller;
 
 import com.example.catchtable.common.response.BaseResponse;
-import com.example.catchtable.dto.GetRestaurantImagesResponse;
-import com.example.catchtable.dto.GetRestaurantListResponse;
-import com.example.catchtable.dto.GetRestaurantMenuResponse;
-import com.example.catchtable.dto.GetRestaurantReservationsResponse;
+import com.example.catchtable.dto.restaurantImage.GetRestaurantImagesResponse;
+import com.example.catchtable.dto.restaurant.GetRestaurantListResponse;
+import com.example.catchtable.dto.menu.GetRestaurantMenuResponse;
+import com.example.catchtable.dto.reservation.GetRestaurantReservationsResponse;
 import com.example.catchtable.dto.restaurant.GetRestaurantResponse;
 import com.example.catchtable.dto.review.GetReviewResponse;
 import com.example.catchtable.service.RestaurantService;
