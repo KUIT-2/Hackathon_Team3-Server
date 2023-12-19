@@ -18,4 +18,5 @@ public class GetReviewResponse {
     private boolean isRevisit;
     private int rating;
     private Timestamp date;
+    private String userName;
 }
