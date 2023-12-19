@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Timestamp;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,4 +17,5 @@ public class GetReviewResponse {
     private String contents;
     private boolean isRevisit;
     private int rating;
+    private Timestamp date;
 }
