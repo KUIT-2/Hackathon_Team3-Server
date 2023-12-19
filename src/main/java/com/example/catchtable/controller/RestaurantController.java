@@ -5,15 +5,14 @@ import com.example.catchtable.dto.GetRestaurantImagesResponse;
 import com.example.catchtable.dto.GetRestaurantListResponse;
 
 import com.example.catchtable.dto.GetRestaurantMenuResponse;
+import com.example.catchtable.dto.GetRestaurantReservationsResponse;
 import com.example.catchtable.dto.restaurant.GetRestaurantResponse;
 import com.example.catchtable.dto.review.GetReviewResponse;
 import com.example.catchtable.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
@@ -48,5 +47,11 @@ public class RestaurantController {
     public BaseResponse<List<GetRestaurantImagesResponse>> getRestaurantImages(@PathVariable long restaurantId) {
         return new BaseResponse<List<GetRestaurantImagesResponse>>((restaurantService.getRestaurantImageList(restaurantId)));
     }
+
+    @GetMapping("/{restaurantId}/reservations")
+    public BaseResponse<GetRestaurantReservationsResponse> getRestaurantReservation(@PathVariable long restaurantId, @RequestParam(name = "timestamp") String date ) {
+        return new BaseResponse<GetRestaurantReservationsResponse>(restaurantService.getReservations(restaurantId, date));
+    }
+
 
 }
