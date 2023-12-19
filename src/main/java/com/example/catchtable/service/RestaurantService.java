@@ -7,10 +7,13 @@ import com.example.catchtable.dto.GetRestaurantListResponse;
 import com.example.catchtable.dto.GetRestaurantMenuResponse;
 import com.example.catchtable.dto.menu.MenuDto;
 import com.example.catchtable.dto.restaurant.GetRestaurantResponse;
+import com.example.catchtable.dto.review.GetReviewResponse;
 import com.example.catchtable.model.Restaurant;
+import com.example.catchtable.model.Review;
 import com.example.catchtable.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -68,13 +71,18 @@ public class RestaurantService {
         );
     }
 
-    private int calculateStarCount(Restaurant restaurant) {
+    private double calculateStarCount(Restaurant restaurant) {
         // 별점 계산 로직 구현
-        return 0; // 임시 반환값
+        List<Review> reviews = restaurant.getReviews();
+        double sum = 0;
+        for (Review review : reviews) {
+            sum += review.getRating();
+        }
+        return sum; // 임시 반환값
     }
 
 
-   public List<GetRestaurantMenuResponse> getMenuList(Long restaurantId) {
+    public List<GetRestaurantMenuResponse> getMenuList(Long restaurantId) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId).
                 orElseThrow(() -> new RuntimeException("Restaurant not found"));
 
@@ -93,5 +101,20 @@ public class RestaurantService {
                 .map(image -> new GetRestaurantImagesResponse(image.getUrl()))
                 .collect(Collectors.toList());
     }
+
+    public List<GetReviewResponse> getReviews(Long restaurantId) {
+        Restaurant restaurant = restaurantRepository.findById(restaurantId).
+                orElseThrow(() -> new RuntimeException("Restaurant not found"));
+
+        return restaurant.getReviews().stream()
+                .map(review -> new GetReviewResponse(
+                        review.getReviewId(),
+                        review.getImageUrl(),
+                        review.getContents(),
+                        review.getIsRevisit(),
+                        review.getRating()))
+                .collect(Collectors.toList());
+    }
+
 }
 

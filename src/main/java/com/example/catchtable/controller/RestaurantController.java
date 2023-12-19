@@ -6,6 +6,7 @@ import com.example.catchtable.dto.GetRestaurantListResponse;
 
 import com.example.catchtable.dto.GetRestaurantMenuResponse;
 import com.example.catchtable.dto.restaurant.GetRestaurantResponse;
+import com.example.catchtable.dto.review.GetReviewResponse;
 import com.example.catchtable.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +37,11 @@ public class RestaurantController {
     @GetMapping("/{restaurantId}")
     public BaseResponse<GetRestaurantResponse> getRestaurantById(@PathVariable Long restaurantId) {
         return new BaseResponse<>(restaurantService.getRestaurantById(restaurantId));
+    }
+
+    @GetMapping("{restaurantId}/reviews")
+    public BaseResponse<List<GetReviewResponse>> getRestaurantReviews(@PathVariable Long restaurantId) {
+        return new BaseResponse<>(restaurantService.getReviews(restaurantId));
     }
 
     @GetMapping("/{restaurantId}/images")
