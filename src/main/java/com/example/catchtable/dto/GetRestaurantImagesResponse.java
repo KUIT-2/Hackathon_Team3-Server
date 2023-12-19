@@ -9,12 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetBriefRestaurantResponse {
-
-    private long restaurantId;
+public class GetRestaurantImagesResponse {
     private String imageUrl;
-    private String restaurantName;
-    private double starCount;
-    private String category;
-    private String region;
 }
