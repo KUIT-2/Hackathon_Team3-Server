@@ -8,22 +8,23 @@ import lombok.Setter;
 @Entity
 @Table(name = "review")
 @Getter
-@Setter
 public class Review {
 
     @Id
+    @Column(name = "review_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
 
+    @Column(name = "image_url")
     private String imageUrl;
 
-    @Column(nullable = false)
+    @Column(name = "contents", nullable = false)
     private String contents;
 
-    @Column(nullable = false)
+    @Column(name = "is_revisit", nullable = false)
     private Boolean isRevisit;
 
-    @Column(nullable = false)
+    @Column(name = "rating", nullable = false)
     private Integer rating;
 
     @ManyToOne
