@@ -48,9 +48,10 @@ public enum BaseExceptionResponseStatus implements ResponseStatus {
     EMAIL_NOT_FOUND(4006, HttpStatus.BAD_REQUEST.value(), "존재하지 않는 이메일입니다."),
 
     /**
-     * 6000: Coupon 오류
+     * 6000: 오류
      */
-    INVALID_RESERVATION(6000, HttpStatus.BAD_REQUEST.value(), "잘못된 예약입니다."),;
+    INVALID_RESERVATION(6000, HttpStatus.BAD_REQUEST.value(), "잘못된 예약입니다."),
+    INVALID_MENU(6001, HttpStatus.BAD_REQUEST.value(), "잘못된 예약입니다.");
 
     private final int code;
     private final int status;
