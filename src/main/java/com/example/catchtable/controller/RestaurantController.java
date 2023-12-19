@@ -47,7 +47,6 @@ public class RestaurantController {
     public BaseResponse<List<GetRestaurantImagesResponse>> getRestaurantImages(@PathVariable long restaurantId) {
         return new BaseResponse<List<GetRestaurantImagesResponse>>((restaurantService.getRestaurantImageList(restaurantId)));
     }
-
     @GetMapping("/{restaurantId}/reservations")
     public BaseResponse<GetRestaurantReservationsResponse> getRestaurantReservation(@PathVariable long restaurantId, @RequestParam(name = "timestamp") String date ) {
         return new BaseResponse<GetRestaurantReservationsResponse>(restaurantService.getReservations(restaurantId, date));
