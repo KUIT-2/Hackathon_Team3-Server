@@ -1,4 +1,4 @@
-package com.example.catchtable.dto;
+package com.example.catchtable.dto.reservation;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

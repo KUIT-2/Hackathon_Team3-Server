@@ -1,11 +1,12 @@
 package com.example.catchtable.service;
 
-import com.example.catchtable.dto.*;
-
+import com.example.catchtable.dto.menu.GetRestaurantMenuResponse;
 import com.example.catchtable.dto.menu.MenuDto;
-import com.example.catchtable.dto.reservation.PostReservationRequest;
-import com.example.catchtable.dto.reservation.PostReservationResponse;
+import com.example.catchtable.dto.reservation.GetRestaurantReservationsResponse;
+import com.example.catchtable.dto.restaurant.GetBriefRestaurantResponse;
+import com.example.catchtable.dto.restaurant.GetRestaurantListResponse;
 import com.example.catchtable.dto.restaurant.GetRestaurantResponse;
+import com.example.catchtable.dto.restaurantImage.GetRestaurantImagesResponse;
 import com.example.catchtable.dto.review.GetReviewResponse;
 import com.example.catchtable.model.Reservation;
 import com.example.catchtable.model.Restaurant;
