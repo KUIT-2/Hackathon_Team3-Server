@@ -16,7 +16,7 @@ public class Reservation {
     @Column(name = "reservation_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
-    private Long reservationId;
+    private long reservationId;
 
     @Column(name = "date")
     private Timestamp date;
@@ -30,4 +30,11 @@ public class Reservation {
     @ManyToOne
     @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
+
+    public Reservation(Timestamp date, Timestamp time, Long countPeople, Restaurant restaurant) {
+        this.date = date;
+        this.time = time;
+        this.countPeople = countPeople;
+        this.restaurant = restaurant;
+    }
 }

@@ -3,7 +3,6 @@ package com.example.catchtable.controller;
 import com.example.catchtable.common.response.BaseResponse;
 import com.example.catchtable.dto.GetRestaurantImagesResponse;
 import com.example.catchtable.dto.GetRestaurantListResponse;
-
 import com.example.catchtable.dto.GetRestaurantMenuResponse;
 import com.example.catchtable.dto.GetRestaurantReservationsResponse;
 import com.example.catchtable.dto.restaurant.GetRestaurantResponse;
@@ -12,8 +11,8 @@ import com.example.catchtable.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/restaurants")
