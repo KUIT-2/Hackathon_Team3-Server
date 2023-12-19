@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "restaurant")
-@NoArgsConstructor
 @Getter
+@NoArgsConstructor
 public class Restaurant {
 
     @Id
@@ -34,6 +34,10 @@ public class Restaurant {
     @Column(name = "name")
     @NotNull
     private String name;
+
+    @Column(name = "brief_info")
+    @NotNull
+    private String briefInfo;
 
     @Column(name = "lunch_price")
     @NotNull
@@ -65,9 +69,10 @@ public class Restaurant {
     private List<RestaurantImage> restaurantImages = new ArrayList<>();
 
 
-    public Restaurant(Long restaurant_id, String category, String region, String address, String name, String lunch_price, String dinner_price) {
+    public Restaurant(Long restaurant_id, String category, String briefInfo, String region, String address, String name, String lunch_price, String dinner_price) {
         this.restaurantId = restaurant_id;
         this.category = category;
+        this.briefInfo = briefInfo;
         this.region = region;
         this.address = address;
         this.name = name;
