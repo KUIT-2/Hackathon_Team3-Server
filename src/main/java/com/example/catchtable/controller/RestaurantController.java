@@ -29,10 +29,10 @@ public class RestaurantController {
     }
 
 
-  @GetMapping("{restaurantId}/menus")
+    @GetMapping("{restaurantId}/menus")
     public BaseResponse<List<GetRestaurantMenuResponse>> getRestaurantMenus(@PathVariable long restaurantId) {
-      return new BaseResponse<List<GetRestaurantMenuResponse>>(restaurantService.getMenuList(restaurantId));
-  }
+        return new BaseResponse<List<GetRestaurantMenuResponse>>(restaurantService.getMenuList(restaurantId));
+    }
 
     @GetMapping("/{restaurantId}")
     public BaseResponse<GetRestaurantResponse> getRestaurantById(@PathVariable Long restaurantId) {
