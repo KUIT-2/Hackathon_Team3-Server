@@ -2,6 +2,8 @@ package com.example.catchtable.service;
 
 import com.example.catchtable.dto.GetBriefRestaurantResponse;
 import com.example.catchtable.dto.GetRestaurantListResponse;
+
+import com.example.catchtable.dto.GetRestaurantMenuResponse;
 import com.example.catchtable.dto.menu.MenuDto;
 import com.example.catchtable.dto.restaurant.GetRestaurantResponse;
 import com.example.catchtable.model.Restaurant;
@@ -71,5 +73,15 @@ public class RestaurantService {
     }
 
 
+   public List<GetRestaurantMenuResponse> getMenuList(Long restaurantId) {
+        Restaurant restaurant = restaurantRepository.findById(restaurantId).
+                orElseThrow(() -> new RuntimeException("Restaurant not found"));
+
+        return restaurant.getMenus().stream()
+                .map(menu -> new GetRestaurantMenuResponse(
+                        menu.getName(),
+                        menu.getPrice()))
+                .collect(Collectors.toList());
+    }
 }
 
