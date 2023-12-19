@@ -23,6 +23,16 @@ public class User {
     @Column(name = "region")
     private String region;
 
+    public User(String name, String introduction, String region) {
+        this.name = name;
+        this.introduction = introduction;
+        this.region = region;
+    }
+
+    public User() {
+
+    }
+
     //@OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
 
 }
