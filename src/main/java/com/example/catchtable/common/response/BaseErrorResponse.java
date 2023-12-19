@@ -1,7 +1,7 @@
 package com.example.catchtable.common.response;
 
+import com.example.catchtable.common.response.status.ResponseStatus;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import kuit2.server.common.response.status.ResponseStatus;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
