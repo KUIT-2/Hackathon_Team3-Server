@@ -85,8 +85,9 @@ public class RestaurantService {
             sum += review.getRating();
             count++;
         }
-        sum /= count;
-        return sum; // 임시 반환값
+        double average = sum / reviews.size();
+        
+        return Math.round(average * 10) / 10.0;
     }
 
 
