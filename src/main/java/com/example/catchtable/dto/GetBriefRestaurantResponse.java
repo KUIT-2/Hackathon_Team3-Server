@@ -12,6 +12,7 @@ import lombok.Setter;
 public class GetBriefRestaurantResponse {
 
     private long restaurantId;
+    private String imageUrl;
     private String restaurantName;
     private int starCount;
     private String category;
