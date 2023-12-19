@@ -1,11 +1,12 @@
 package com.example.catchtable.common.response;
 
+import com.example.catchtable.common.response.status.ResponseStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import kuit2.server.common.response.status.ResponseStatus;
 import lombok.Getter;
 
-import static kuit2.server.common.response.status.BaseExceptionResponseStatus.SUCCESS;
+import static com.example.catchtable.common.response.status.BaseExceptionResponseStatus.SUCCESS;
+
 
 @Getter
 @JsonPropertyOrder({"code", "status", "message", "result"})
