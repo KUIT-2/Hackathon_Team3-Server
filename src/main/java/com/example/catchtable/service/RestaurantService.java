@@ -1,6 +1,7 @@
 package com.example.catchtable.service;
 
 import com.example.catchtable.dto.GetBriefRestaurantResponse;
+import com.example.catchtable.dto.GetRestaurantImagesResponse;
 import com.example.catchtable.dto.GetRestaurantListResponse;
 
 import com.example.catchtable.dto.GetRestaurantMenuResponse;
@@ -81,6 +82,15 @@ public class RestaurantService {
                 .map(menu -> new GetRestaurantMenuResponse(
                         menu.getName(),
                         menu.getPrice()))
+                .collect(Collectors.toList());
+    }
+
+    public List<GetRestaurantImagesResponse> getRestaurantImageList(long restaurantId) {
+        Restaurant restaurant = restaurantRepository.findById(restaurantId).
+                orElseThrow(() -> new RuntimeException("Restaurant not found"));
+
+        return restaurant.getRestaurantImages().stream()
+                .map(image -> new GetRestaurantImagesResponse(image.getUrl()))
                 .collect(Collectors.toList());
     }
 }
