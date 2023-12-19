@@ -13,11 +13,5 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GetRestaurantReservationsResponse {
-
-    private Timestamp lunchStart;
-    private Timestamp lunchEnd;
-    private Timestamp dinnerStart;
-    private Timestamp dinnerEnd;
-
-    private List<Timestamp> occupiedTime;
+    private List<String> availableTime;
 }

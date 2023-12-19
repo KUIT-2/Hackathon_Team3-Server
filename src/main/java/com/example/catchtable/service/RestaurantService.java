@@ -15,9 +15,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -136,11 +141,49 @@ public class RestaurantService {
                 .collect(Collectors.toList());
 
         return new GetRestaurantReservationsResponse(
-                restaurant.getLunchStart(),
-                restaurant.getLunchEnd(),
-                restaurant.getDinnerStart(),
-                restaurant.getDinnerEnd(),
-                occupiedTimes);
+                calculateAvailableTime(
+                        restaurant.getLunchStart(),
+                        restaurant.getLunchEnd(),
+                        restaurant.getDinnerStart(),
+                        restaurant.getDinnerEnd(),
+                        occupiedTimes
+                )
+        );
+    }
+
+    private List<String> calculateAvailableTime(Timestamp lunchStart, Timestamp lunchEnd, Timestamp dinnerStart, Timestamp dinnerEnd, List<Timestamp> occupiedTimes) {
+        List<String> availableTimes = new ArrayList<>();
+
+        Timestamp currentTime = new Timestamp(lunchStart.getTime());
+        LocalTime localTime = currentTime.toLocalDateTime().toLocalTime();
+
+        while (localTime.isBefore(lunchEnd.toLocalDateTime().toLocalTime())) {
+            if (!isOccupied(localTime, occupiedTimes)) {
+                availableTimes.add(localTime.toString());
+            }
+            localTime = localTime.plusMinutes(30);
+        }
+
+        currentTime = new Timestamp(dinnerStart.getTime());
+        localTime = currentTime.toLocalDateTime().toLocalTime();
+
+        while (localTime.isBefore(dinnerEnd.toLocalDateTime().toLocalTime())) {
+            if (!isOccupied(localTime, occupiedTimes)) {
+                availableTimes.add(localTime.toString());
+            }
+            localTime = localTime.plusMinutes(30);
+        }
+
+        return availableTimes;
+    }
+
+    private boolean isOccupied(LocalTime time, List<Timestamp> occupiedTimes) {
+        for (Timestamp occupiedTime : occupiedTimes) {
+            if (time.equals(occupiedTime.toLocalDateTime().toLocalTime())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean isSameDay(Timestamp timestamp, String inputDateString) {
