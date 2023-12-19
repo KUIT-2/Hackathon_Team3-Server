@@ -11,16 +11,19 @@ import com.example.catchtable.model.Restaurant;
 import com.example.catchtable.model.Review;
 import com.example.catchtable.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
@@ -128,8 +131,8 @@ public class RestaurantService {
                 .orElseThrow(() -> new RuntimeException("Restaurant not found"));
 
         List<Timestamp> occupiedTimes = restaurant.getReservations().stream()
-                .filter(reservation -> isSameDay(reservation.getTime(), date))
-                .map(Reservation::getDate)
+                .filter(reservation -> isSameDay(reservation.getDate(), date))
+                .map(Reservation::getTime) // 예약된 시간을 리스트에 추가합니다.
                 .collect(Collectors.toList());
 
         return new GetRestaurantReservationsResponse(
@@ -140,15 +143,14 @@ public class RestaurantService {
                 occupiedTimes);
     }
 
-    private boolean isSameDay(Timestamp timestamp, String date) {
-        // Timestamp를 LocalDate로 변환
-        LocalDate timestampDate = timestamp.toLocalDateTime().toLocalDate();
-        // 주어진 문자열을 LocalDate로 변환
-        LocalDate inputDate = LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE);
+    private boolean isSameDay(Timestamp timestamp, String inputDateString) {
+        LocalDate reservationDate = timestamp.toInstant().atZone(ZoneId.of("UTC")).toLocalDate();
 
-        // 두 LocalDate 객체 비교
-        return timestampDate.equals(inputDate);
+        LocalDate inputDate = LocalDate.parse(inputDateString);
+
+        return reservationDate.isEqual(inputDate);
     }
+
 
     public PostRestaurantResponse saveRestaurant(PostRestaurantRequest postRestaurantRequest) {
         Restaurant restaurant = restaurantRepository.save(
