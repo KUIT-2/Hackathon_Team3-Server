@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity(name = "menu")
-@NoArgsConstructor
 @Getter
 public class Menu {
 
@@ -14,7 +13,7 @@ public class Menu {
     @Column(name = "menu_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
-    private Long menuId;
+    private long menuId;
 
     @Column(name = "name")
     @NotNull
@@ -27,4 +26,14 @@ public class Menu {
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
+
+    public Menu(String name, Long price, Restaurant restaurant) {
+        this.name = name;
+        this.price = price;
+        this.restaurant = restaurant;
+    }
+
+    public Menu() {
+
+    }
 }
