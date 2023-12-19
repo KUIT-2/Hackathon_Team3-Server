@@ -2,6 +2,8 @@ package com.example.catchtable.service;
 
 import com.example.catchtable.dto.GetBriefRestaurantResponse;
 import com.example.catchtable.dto.GetRestaurantListResponse;
+import com.example.catchtable.dto.menu.MenuDto;
+import com.example.catchtable.dto.restaurant.GetRestaurantResponse;
 import com.example.catchtable.model.Restaurant;
 import com.example.catchtable.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,9 +33,43 @@ public class RestaurantService {
         return new GetRestaurantListResponse(restaurantList);
     }
 
+    public GetRestaurantResponse getRestaurantById(Long id) {
+        Restaurant restaurant = restaurantRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Restaurant not found"));
+
+        List<String> restaurantImages = restaurant.getRestaurantImages()
+                .stream()
+                .map(restaurantImage -> restaurantImage.getUrl())
+                .collect(Collectors.toList());
+
+        List<MenuDto> menuList = restaurant.getMenus()
+                .stream()
+                .map(menu -> new MenuDto(menu.getName(), menu.getPrice()))
+                .collect(Collectors.toList());
+
+        return new GetRestaurantResponse(
+                restaurantImages,
+                restaurant.getCategory(),
+                restaurant.getRegion(),
+                restaurant.getName(),
+                calculateStarCount(restaurant),
+                restaurant.getBriefInfo(),
+                restaurant.getLunchPrice(),
+                restaurant.getDinnerPrice(),
+                menuList,
+                restaurant.getAddress(),
+                restaurant.getPhoneNumber(),
+                restaurant.getDescription(),
+                restaurant.getOperatingHour(),
+                restaurant.getRegularClosed()
+        );
+    }
+
     private int calculateStarCount(Restaurant restaurant) {
         // 별점 계산 로직 구현
         return 0; // 임시 반환값
     }
+
+
 }
 
