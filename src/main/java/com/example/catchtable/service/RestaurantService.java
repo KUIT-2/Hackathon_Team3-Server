@@ -3,9 +3,7 @@ package com.example.catchtable.service;
 import com.example.catchtable.dto.menu.GetRestaurantMenuResponse;
 import com.example.catchtable.dto.menu.MenuDto;
 import com.example.catchtable.dto.reservation.GetRestaurantReservationsResponse;
-import com.example.catchtable.dto.restaurant.GetBriefRestaurantResponse;
-import com.example.catchtable.dto.restaurant.GetRestaurantListResponse;
-import com.example.catchtable.dto.restaurant.GetRestaurantResponse;
+import com.example.catchtable.dto.restaurant.*;
 import com.example.catchtable.dto.restaurantImage.GetRestaurantImagesResponse;
 import com.example.catchtable.dto.review.GetReviewResponse;
 import com.example.catchtable.model.Reservation;
@@ -150,6 +148,29 @@ public class RestaurantService {
 
         // 두 LocalDate 객체 비교
         return timestampDate.equals(inputDate);
+    }
+
+    public PostRestaurantResponse saveRestaurant(PostRestaurantRequest postRestaurantRequest) {
+        Restaurant restaurant = restaurantRepository.save(
+                new Restaurant(
+                        postRestaurantRequest.getCategory(),
+                        postRestaurantRequest.getRegion(),
+                        postRestaurantRequest.getAddress(),
+                        postRestaurantRequest.getName(),
+                        postRestaurantRequest.getBriefInfo(),
+                        postRestaurantRequest.getLunchPrice(),
+                        postRestaurantRequest.getPhoneNumber(),
+                        postRestaurantRequest.getDescription(),
+                        postRestaurantRequest.getOperatingHour(),
+                        postRestaurantRequest.getRegularClosed(),
+                        postRestaurantRequest.getDinnerPrice(),
+                        postRestaurantRequest.getLunchStart(),
+                        postRestaurantRequest.getLunchEnd(),
+                        postRestaurantRequest.getDinnerStart(),
+                        postRestaurantRequest.getDinnerEnd()
+                )
+        );
+        return new PostRestaurantResponse(restaurant.getRestaurantId());
     }
 
 
