@@ -20,6 +20,5 @@ public class RestaurantImage {
     @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
 
-    // Constructors, getters and setters
 }
 
