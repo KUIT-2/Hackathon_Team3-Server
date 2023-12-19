@@ -50,7 +50,7 @@ public enum BaseExceptionResponseStatus implements ResponseStatus {
     /**
      * 6000: Coupon 오류
      */
-    INVALID_COUPON_CODE(6000, HttpStatus.BAD_REQUEST.value(), "잘못된 쿠폰 코드 입력입니다.");
+    INVALID_RESERVATION(6000, HttpStatus.BAD_REQUEST.value(), "잘못된 예약입니다."),;
 
     private final int code;
     private final int status;

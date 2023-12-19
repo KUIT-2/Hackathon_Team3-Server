@@ -3,6 +3,8 @@ package com.example.catchtable.service;
 import com.example.catchtable.dto.*;
 
 import com.example.catchtable.dto.menu.MenuDto;
+import com.example.catchtable.dto.reservation.PostReservationRequest;
+import com.example.catchtable.dto.reservation.PostReservationResponse;
 import com.example.catchtable.dto.restaurant.GetRestaurantResponse;
 import com.example.catchtable.dto.review.GetReviewResponse;
 import com.example.catchtable.model.Reservation;
@@ -145,5 +147,12 @@ public class RestaurantService {
         return timestampDate.equals(inputDate);
     }
 
+
+//    public PostReservationResponse postReservation(PostReservationRequest postReservationRequest, long restaurantId) {
+//        Restaurant restaurant = restaurantRepository.findById(restaurantId).
+//                orElseThrow(() -> new RuntimeException("Restaurant not found"));
+//
+//
+//    }
 }
 
