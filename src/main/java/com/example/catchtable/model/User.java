@@ -32,8 +32,5 @@ public class User {
     public User() {
 
     }
-
-    //@OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
-
 }
 

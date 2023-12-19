@@ -40,6 +40,5 @@ public class Review {
     @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
 
-    // Constructors, getters and setters
 }
 

@@ -35,7 +35,6 @@ public class RestaurantService {
                         restaurant.getRestaurantId(),
                         restaurant.getRestaurantImages().get(0).getUrl(),
                         restaurant.getName(),
-                        // 가정: 별점은 별도의 계산 또는 필드를 통해 가져옵니다.
                         calculateStarCount(restaurant),
                         restaurant.getCategory(),
                         restaurant.getRegion()))
@@ -77,13 +76,13 @@ public class RestaurantService {
     }
 
     private double calculateStarCount(Restaurant restaurant) {
-        // 별점 계산 로직 구현
+
         List<Review> reviews = restaurant.getReviews();
         double sum = 0;
-        int count = 0;
+
         for (Review review : reviews) {
             sum += review.getRating();
-            count++;
+
         }
         double average = sum / reviews.size();
         
@@ -133,7 +132,7 @@ public class RestaurantService {
 
         List<Timestamp> occupiedTimes = restaurant.getReservations().stream()
                 .filter(reservation -> isSameDay(reservation.getDate(), date))
-                .map(Reservation::getTime) // 예약된 시간을 리스트에 추가합니다.
+                .map(Reservation::getTime)
                 .collect(Collectors.toList());
 
         return new GetRestaurantReservationsResponse(
@@ -176,12 +175,5 @@ public class RestaurantService {
         return new PostRestaurantResponse(restaurant.getRestaurantId());
     }
 
-
-//    public PostReservationResponse postReservation(PostReservationRequest postReservationRequest, long restaurantId) {
-//        Restaurant restaurant = restaurantRepository.findById(restaurantId).
-//                orElseThrow(() -> new RuntimeException("Restaurant not found"));
-//
-//
-//    }
 }
 
