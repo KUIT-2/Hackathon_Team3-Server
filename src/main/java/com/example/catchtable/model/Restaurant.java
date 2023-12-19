@@ -11,14 +11,13 @@ import java.util.List;
 
 @Entity(name = "restaurant")
 @Getter
-@NoArgsConstructor
 public class Restaurant {
 
     @Id
     @Column(name = "restaurant_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
-    private Long restaurantId;
+    private long restaurantId;
 
     @Column(name = "category")
     @NotNull
@@ -84,8 +83,7 @@ public class Restaurant {
     @OneToMany(mappedBy = "restaurant", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Reservation> reservations = new ArrayList<>();
 
-    public Restaurant(Long restaurantId, String category, String region, String address, String name, String briefInfo, String lunchPrice, String dinnerPrice, Timestamp lunchStart, Timestamp lunchEnd, Timestamp dinnerStart, Timestamp dinnerEnd) {
-        this.restaurantId = restaurantId;
+    public Restaurant(String category, String region, String address, String name, String briefInfo, String lunchPrice, String dinnerPrice, String phoneNumber, String description, String operatingHour, String regularClosed, Timestamp lunchStart, Timestamp lunchEnd, Timestamp dinnerStart, Timestamp dinnerEnd) {
         this.category = category;
         this.region = region;
         this.address = address;
@@ -93,9 +91,16 @@ public class Restaurant {
         this.briefInfo = briefInfo;
         this.lunchPrice = lunchPrice;
         this.dinnerPrice = dinnerPrice;
+        this.phoneNumber = phoneNumber;
+        this.description = description;
+        this.operatingHour = operatingHour;
+        this.regularClosed = regularClosed;
         this.lunchStart = lunchStart;
         this.lunchEnd = lunchEnd;
         this.dinnerStart = dinnerStart;
         this.dinnerEnd = dinnerEnd;
+    }
+
+    public Restaurant() {
     }
 }
