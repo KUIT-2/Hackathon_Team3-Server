@@ -17,7 +17,7 @@ import static com.example.catchtable.common.response.status.BaseExceptionRespons
 import static com.example.catchtable.common.response.status.BaseExceptionResponseStatus.INVALID_USER_VALUE;
 import static com.example.catchtable.util.BindingResultUtils.getErrorMessages;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "https://kuit-2.github.io/Hackathon_Team3-Web/"})
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
